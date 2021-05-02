@@ -1,70 +1,158 @@
-# Getting Started with Create React App
+# personal-full-stack-project
+On-The-Rocks full stack project
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
-## Available Scripts
+## MVP
+- Users should be able to register an account, log in and out
+- Users should be able to find trails and campgrounds
+- Users should be able to rate trails and campgrounds
+- Users should be able to search for trails and campgrounds by location and difficulty and rating
+- Users should be able to delete an account
 
-In the project directory, you can run:
+## ICEBOX
+- Clean error handling via utility snack bars
+- Ability to log in with social media or 3rd party accounts
+- Ability to participate in discussion boards
+- leave feedback for articles
+- share/recommend trails/campgrounds with another user
+- admin UI
+- SMS and Email features
+- Users should be able to review/rate articles/posts
+- add/remove trails and campgrounds to a plan/todo list
+- view trails based on ranked difficulty
+- rate difficulty of trails
 
-### `npm start`
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
+### Dependencies
+- axios
+- bcryptjs
+- dotenv
+- express
+- express-session
+- massive
+- redux
+- redux-devtools-extension
+- redux-promise-middleware
+- react-router-dom
+- react-redux
+- react-toastify
 
-The page will reload if you make edits.\
-You will also see any lint errors in the console.
 
-### `npm test`
+## Database
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+trails
+```SQL
+   CREATE TABLE products (
+    trail_id          SERIAL PRIMARY KEY NOT NULL,
+    trail_rank        VARCHAR(50) NOT NULL,
+    trail_location    VARCHAR(100) NOT NULL,
+    trail_description VARCHAR(1000) NOT NULL,
+    trail_name        VARCHAR(100) NOT NULL
+   ); 
+```
 
-### `npm run build`
+campgrounds
+```SQL
+   CREATE TABLE products (
+    campground_id  SERIAL PRIMARY KEY NOT NULL,
+    cg_location    VARCHAR(100) NOT NULL,
+    cg_description VARCHAR(1000) NOT NULL,
+    cg_name        VARCHAR(100) NOT NULL
+   ); 
+```
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+trail_images
+```SQL
+   CREATE TABLE product_images (
+    trail_image_id  SERIAL PRIMARY KEY NOT NULL,
+    trail_id      REFERENCES trails (trail_id),
+    url             TEXT NOT NULL
+   );
+```
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+campground_images
+```SQL
+   CREATE TABLE product_images (
+    cg_image_id        SERIAL PRIMARY KEY NOT NULL,
+    campground_id      REFERENCES campgrounds (campground_id),
+    url                TEXT NOT NULL
+   );
+```
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+trail_favorites
+```SQL
+   CREATE TABLE trail_favorites (
+    favorite_trail_id    SERIAL PRIMARY KEY NOT NULL,
+    user_id              REFERENCES users (user_id),
+    trail_id             REFERENCES trails (trail_id)
+   );
+```
 
-### `npm run eject`
+camp_favorites
+```SQL
+   CREATE TABLE camp_favorites (
+    favorite_cg_id    SERIAL PRIMARY KEY NOT NULL,
+    user_id           REFERENCES users (user_id),
+    campground_id     REFERENCES campgrounds (campground_id)
+   );
+```
 
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
 
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
+users
+```SQL
+   CREATE TABLE users (
+    user_id    SERIAL PRIMARY KEY NOT NULL,
+    email      VARCHAR(100) NOT NULL,
+    hash       VARCHAR(1000) NOT NULL
+  ); 
+```
 
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
+posts
+```SQL
+   CREATE TABLE posts (
+    post_id       SERIAL PRIMARY KEY NOT NULL,
+    author_id     REFERENCES users (user_id),
+    title         VARCHAR(50) NOT NULL,
+    post_content  TEXT,
+    url           TEXT,
+    date_created  TIMESTAMP
+   );
+```
 
-## Learn More
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+## Server
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+### Endpoints
 
-### Code Splitting
+#### Trails/Campgrounds
+- get all trails & campgrounds(locations) => GET '/api/locations'
+- get specific trails/campgrounds => POST '/api/trails' OR '/api/campgrounds'
+- get specific trail/campground => GET '/api/trail/:id' OR '/api/campground/:id'
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
 
-### Analyzing the Bundle Size
+#### Users
+- register user => POST '/api/register'
+- login a user => POST '/api/login'
+- logout a user => DELETE '/api/logout'
+- delete user => DELETE '/api/delete'
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
 
-### Making a Progressive Web App
+### Controllers
+- usersController
+- productsController
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
 
-### Advanced Configuration
+## Front-end
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
+Wireframes and Component Tree:
 
-### Deployment
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
+### Routes
 
-### `npm run build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+- path="/" => Landing
+- path="/explore" => Explore
+- path="/location/:location_id" => Location Display
+- path="/favorites" => Favorites
+   - path="/favorite/:category" => Category Favorite
+- path="/settings" => Settings
