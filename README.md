@@ -42,7 +42,7 @@ On-The-Rocks full stack project
 
 trails
 ```SQL
-   CREATE TABLE products (
+   CREATE TABLE trails (
     trail_id          SERIAL PRIMARY KEY NOT NULL,
     trail_rank        VARCHAR(50) NOT NULL,
     trail_location    VARCHAR(100) NOT NULL,
@@ -53,7 +53,7 @@ trails
 
 campgrounds
 ```SQL
-   CREATE TABLE products (
+   CREATE TABLE campgrounds (
     campground_id  SERIAL PRIMARY KEY NOT NULL,
     cg_location    VARCHAR(100) NOT NULL,
     cg_description VARCHAR(1000) NOT NULL,
@@ -63,7 +63,7 @@ campgrounds
 
 trail_images
 ```SQL
-   CREATE TABLE product_images (
+   CREATE TABLE trail_images (
     trail_image_id  SERIAL PRIMARY KEY NOT NULL,
     trail_id      REFERENCES trails (trail_id),
     url             TEXT NOT NULL
@@ -72,7 +72,7 @@ trail_images
 
 campground_images
 ```SQL
-   CREATE TABLE product_images (
+   CREATE TABLE campground_images (
     cg_image_id        SERIAL PRIMARY KEY NOT NULL,
     campground_id      REFERENCES campgrounds (campground_id),
     url                TEXT NOT NULL
@@ -104,7 +104,7 @@ users
    CREATE TABLE users (
     user_id    SERIAL PRIMARY KEY NOT NULL,
     email      VARCHAR(100) NOT NULL,
-    hash       VARCHAR(1000) NOT NULL
+    password   VARCHAR(1000) NOT NULL
   ); 
 ```
 
