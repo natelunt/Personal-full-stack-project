@@ -1,0 +1,35 @@
+.auth-bdy {
+    width: 100%;
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    background-color: steelblue;
+}
+
+.auth-container {
+    width: 55vw;
+    height: 55vh;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    background-color: seagreen;
+}
+
+.login-box {
+    width: 25vw;
+    height: 50vh;
+    background-color: lightcoral;
+}
+
+.vert-divide {
+    width: 1vw;
+    height: 50vh;
+    background-color: lightslategray;
+}
+
+.register-box {
+    width: 25vw;
+    height: 50vh;
+    background-color: rosybrown;
+}
