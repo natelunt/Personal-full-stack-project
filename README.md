@@ -140,7 +140,8 @@ posts
 
 ### Controllers
 - usersController
-- productsController
+- trailsController
+- campgroundsController
 
 
 ## Front-end
