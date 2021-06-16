@@ -1,34 +1,22 @@
-import React from 'react';
+import React, { useState } from 'react';
 import axios from 'axios';
-// import './nav.css';
+import './nav.css';
 import { connect } from 'react-redux';
 // import { registerUser } from '../redux/userReducer';
 
-function Nav(props) {
 
+const Nav = () => {
+    // const [isLoggedIn, setIsLoggedIn] = useState(false);
     return (
-        <div>
-            <h1>On The Rocks</h1>
-            <form>
-                <input>email</input>
-                <input>password</input>
-                <button>login/registration</button>
-            </form>
+        <div className='nav'>
+            <div className='nav-links'>
+                <button className='explore-button'>explore</button>
+                <button className='plan-button'>plan</button>
+            </div>
+            <div className='nav-img'>On The Rocks</div>
+            <button className='nav-avatar'>avatar</button>
         </div>
     )
 }
-// const Nav = () => {
-//     // const [isLoggedIn, setIsLoggedIn] = useState(false);
-//     return (
-//         <div className='nav'>
-//             <div className='nav-links'>
-//                 <div className='explore-button'>explore</div>
-//                 <div className='plan-button'>plan</div>
-//             </div>
-//             <div className='nav-img'>logo</div>
-//             <div className='nav-avatar'>avatar</div>
-//         </div>
-//     )
-// }
 
 export default Nav

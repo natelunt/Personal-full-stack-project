@@ -1,19 +1,43 @@
 .nav {
     width: 100%;
+    height: 5vh;
     display: flex;
-    justify-content: space-between;
-    align-items: baseline;
+    justify-content: space-around;
+    align-items: center;
     background-color: olivedrab;
 }
 
 .nav-links{
-    width: 10%;
+    width: 15%;
     flex-direction: row;
-    justify-content: flex-start;
+    justify-content: space-between;
     align-items: center;
     background-color: peru;
 }
 
-.nav-img{}
+.explore-button{
+    width: 25%;
+    justify-content: space-around;
+    align-items: center;
+    background-color: powderblue;
+}
 
-.nav-avatar{}
+.plan-button{
+    width: 25%;
+    justify-content: space-around;
+    align-items: center;
+    background-color: slateblue;
+}
+
+.nav-img{
+    width: 60%;
+    align-items: center;
+    background-color: greenyellow;
+}
+
+.nav-avatar{
+    width: 15%;
+    justify-content: flex-end;
+    align-items: center;
+    background-color: peru;
+}
