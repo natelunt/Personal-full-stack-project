@@ -52,7 +52,7 @@ app.post('/api/delete', authCtrl.delete);
 app.get('/api/trails', trailsCtrl.getAllTrails);
 app.post('/api/trails', trailsCtrl.getSpecificTrails);
 app.get('/api/campgrounds', campgroundsCtrl.getAllCampgrounds);
-// app.post('/api/campgrounds', campgroundsCtrl.getSpecificCampgrounds);
+app.post('/api/campgrounds', campgroundsCtrl.getSpecificCampgrounds);
 
 
 /* HTTP REQUEST: 

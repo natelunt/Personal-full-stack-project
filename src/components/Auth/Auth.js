@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import axios from 'axios';
 import './auth.css';
 import { connect } from 'react-redux';
-// import { registerUser } from '../redux/userReducer';
+import { registerUser } from '../../redux/userReducer';
 
 function Auth(props) {
     const [email, setEmail] = useState("");
@@ -11,14 +11,28 @@ function Auth(props) {
     const [registering, setRegistering] = useState(false);
 
     const buttonContent = registering ? "Register" : "Login";
-    const pContent = registering ? "Already have an account?" : "Don't have and account";
-    const spanContent = registering ? "Click here to login" : "Click here to register";
+    const pContent = registering ? "Already have an account?" : "Don't have and account?";
+    const spanContent = registering ? " Click here to login" : " Click here to register";
+    
+
+    function handleSubmit() {
+        if(registering) {
+            props.registerUser(email, password)
+        }
+
+        props.loginUser(email, password)
+    }
     
 
     return (
         <div>
             <h1>Login or Register!</h1>
-            <form>
+            <form onSubmit={(e) => {
+                e.preventDefault()
+                handleSubmit()
+                setEmail('')
+                setPassword('')
+            }}>
                 <input type="email" placeholder="Email" value={email} onChange={e => setEmail(e.target.value)}/>
                 <input type="password" placeholder="Password" value={password} onChange={e => setPassword(e.target.value)}/>
                 <button>{buttonContent}</button>
@@ -59,4 +73,14 @@ function Auth(props) {
 //     )
 // }
 
-export default Auth
+const mapStateToProps = reduxState => {
+    return {
+
+    }
+}
+
+const mapDispatchToProps = {
+    registerUser
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(Auth);

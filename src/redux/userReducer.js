@@ -19,6 +19,26 @@ export function registerUser(email, password){
     }
 }
 
+export function loginUser(email, password){
+    return {
+        type: LOGIN_USER,
+        payload: axios.post('/api/login', { email, password })
+    }
+}
+
+export function logoutUser(){
+    return {
+        type: LOGOUT_USER
+    }
+}
+
+export function deleteUser(email, password){
+    return {
+        type: DELETE_USER,
+        payload: axios.post('/api/delete', { email, password })
+    }
+}
+
 export default function reducer(state = initialState, action){
     switch(action.type){
         case REGISTER_USER + '_PENDING':
