@@ -7,6 +7,8 @@ const initialState = {
     errorMessage: ''
 }
 
+
+/* --Reducer actions-- */
 const LOGIN_USER = 'LOGIN_USER';
 const LOGOUT_USER = 'LOGOUT_USER';
 const REGISTER_USER = 'REGISTER_USER';
@@ -38,7 +40,10 @@ export function deleteUser(email, password){
         payload: axios.post('/api/delete', { email, password })
     }
 }
+/* ^-Reducer actions-^ */
 
+
+/* --Reducer function-- */
 export default function reducer(state = initialState, action){
     switch(action.type){
         case REGISTER_USER + '_PENDING':
@@ -48,7 +53,22 @@ export default function reducer(state = initialState, action){
             return { ...state, loading: false, user_id, email }
         case REGISTER_USER + '_REJECTED':
             return { ...state, loading: false, errorMessage: action.payload.data.message }
+        case LOGIN_USER + '_PENDING':
+            return { ...state, loading: true }
+        case LOGIN_USER + '_FULFILLED':            
+            return { ...state, loading: false, user_id: action.payload.data.user_id, email: action.payload.data.email }
+        case LOGIN_USER + '_REJECTED':
+            return { ...state, loading: false, errorMessage: action.payload.data.message }
+        case LOGOUT_USER:
+            return { ...state, ...initialState }
+        case DELETE_USER + '_PENDING':
+            return { ...state, loading: true }
+        case DELETE_USER + '_FULFILLED':
+            return { ...initialState }
+        case DELETE_USER + '_REJECTED':
+            return { ...state, loading: false, errorMessage: action.payload.data.message }
         default:
             return state;
     }
 }
+/* ^-Reducer function-^ */

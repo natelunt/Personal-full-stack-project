@@ -2,7 +2,8 @@ import React, { useState } from 'react';
 import axios from 'axios';
 import './auth.css';
 import { connect } from 'react-redux';
-import { registerUser } from '../../redux/userReducer';
+import { registerUser, loginUser } from '../../redux/userReducer';
+import { Redirect } from 'react-router-dom';
 
 function Auth(props) {
     const [email, setEmail] = useState("");
@@ -18,11 +19,12 @@ function Auth(props) {
     function handleSubmit() {
         if(registering) {
             props.registerUser(email, password)
-        }
-
-        props.loginUser(email, password)
+        }else{props.loginUser(email, password)}
+        
     }
-    
+    if(props.user.email){
+        return <Redirect to="/home"/>
+    }
 
     return (
         <div>
@@ -75,12 +77,13 @@ function Auth(props) {
 
 const mapStateToProps = reduxState => {
     return {
-
+        user: reduxState.user
     }
 }
 
 const mapDispatchToProps = {
-    registerUser
+    registerUser,
+    loginUser
 }
 
 export default connect(mapStateToProps, mapDispatchToProps)(Auth);

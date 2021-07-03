@@ -1,11 +1,13 @@
 import React, { useState, useEffect } from 'react';
+import { Link, Route } from 'react-router-dom';
 import axios from 'axios';
 import './home.css';
 import { connect } from 'react-redux';
-// import { registerUser } from '../redux/userReducer';
+import { registerUser } from '../../redux/userReducer';
 
 function Home() {
     const [trails, setTrails] = useState([]);
+    const [campgrounds, setCampgrounds] = useState([]);
 
     useEffect(() => {
         // TODO: do axios call for trails
@@ -13,17 +15,17 @@ function Home() {
         setTrails([ {}])
     })
 
-    const [campgrounds, setCampgrounds] = useState([]);
+
 
     useEffect(() => {
-        // TODO: do axios call for trails
+        // TODO: do axios call for campgrounds
 
         setCampgrounds(() => {})
     })
 
     return (
         <div>
-            home
+            I'm the home page
         </div>
     )
 }
