@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import axios from 'axios';
 import './nav.css';
 import { connect } from 'react-redux';
+import { Link } from 'react-router-dom';
 // import { registerUser } from '../redux/userReducer';
 
 
@@ -10,11 +11,11 @@ const Nav = () => {
     return (
         <div className='nav'>
             <div className='nav-links'>
-                <button className='explore-button'>explore</button>
-                <button className='plan-button'>plan</button>
+                <Link to='/explore'><button className='explore-button'>explore</button></Link>
+                <Link to='/plan'><button className='plan-button'>plan</button></Link>
             </div>
-            <div className='nav-img'>On The Rocks</div>
-            <button className='nav-avatar'>avatar</button>
+            <Link to='/home'><div className='nav-img'>On The Rocks</div></Link>
+            <Link to='/menu'><button className='nav-avatar'>avatar</button></Link>
         </div>
     )
 }
