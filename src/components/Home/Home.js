@@ -24,8 +24,11 @@ function Home() {
     })
 
     return (
-        <div>
-            I'm the home page
+        <div className='home'>
+            <div className='topCtnr'>
+                <h1>Welcome</h1>
+                <input type='search' placeholder='Search by city, park or trail name'/>
+            </div>
         </div>
     )
 }
