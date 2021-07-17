@@ -25,10 +25,52 @@ function Home() {
 
     return (
         <div className='home'>
-            <div className='topCtnr'>
+            <section className='topCtnr'>
                 <h1>Welcome</h1>
                 <input type='search' placeholder='Search by city, park or trail name'/>
-            </div>
+            </section>
+            <section className='btmCtnr'>
+                <div className='trails-container'>
+                    <div className='containers-title'></div>
+                    <div className='river-container'>
+                        <div className='river-class'>
+                            <div className='river-track'>
+                                <div className='river-item'>
+                                    <div className='item-card-container'>
+                                        <div className='container'>
+                                            <a></a>
+                                            <div className='backround'></div>
+                                            <div className='card-content'></div>
+                                            <div className='info'></div>
+                                            <div className='info'></div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div className='campgrounds-container'>
+                    <div className='containers-title'></div>
+                    <div className='river-container'>
+                        <div className='river-class'>
+                            <div className='river-track'>
+                                <div className='river-item'>
+                                    <div className='item-card-container'>
+                                        <div className='container'>
+                                            <a></a>
+                                            <div className='backround'></div>
+                                            <div className='card-content'></div>
+                                            <div className='info'></div>
+                                            <div className='info'></div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
         </div>
     )
 }

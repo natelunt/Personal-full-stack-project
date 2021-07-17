@@ -12,7 +12,7 @@ function Auth(props) {
     const [registering, setRegistering] = useState(false);
 
     const buttonContent = registering ? "Register" : "Login";
-    const pContent = registering ? "Already have an account?" : "Don't have and account?";
+    const pContent = registering ? "Already have an account?" : "Don't have an account?";
     const spanContent = registering ? " Click here to login" : " Click here to register";
     
 
