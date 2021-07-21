@@ -40,9 +40,20 @@ function Home() {
                                         <div className='container'>
                                             <a></a>
                                             <div className='backround'></div>
-                                            <div className='card-content'></div>
-                                            <div className='info'></div>
-                                            <div className='info'></div>
+                                            <div className='card-content'>
+                                                <div className='name'></div>
+                                                <a className='location'></a>
+                                                <div className='info'>
+                                                    <span className='trail-challenge'></span>
+                                                    <span className='rating'>
+                                                        <span className='liked-icon'></span>
+                                                        <span className='like-count'>(0)</span>
+                                                        <span className='disliked-icon'></span>
+                                                        <span className='dislike-count'>(0)</span>
+                                                    </span>
+                                                </div>
+                                                <div className='info'></div>
+                                            </div>
                                         </div>
                                     </div>
                                 </div>
@@ -60,9 +71,20 @@ function Home() {
                                         <div className='container'>
                                             <a></a>
                                             <div className='backround'></div>
-                                            <div className='card-content'></div>
-                                            <div className='info'></div>
-                                            <div className='info'></div>
+                                            <div className='card-content'>
+                                                <div className='name'></div>
+                                                <a className='location'></a>
+                                                <div className='info'>
+                                                    <span className='campground-quality'></span>
+                                                    <span className='rating'>
+                                                        <span className='liked-icon'></span>
+                                                        <span className='like-count'>(0)</span>
+                                                        <span className='disliked-icon'></span>
+                                                        <span className='dislike-count'>(0)</span>
+                                                    </span>
+                                                </div>
+                                                <div className='info'></div>
+                                            </div>
                                         </div>
                                     </div>
                                 </div>
