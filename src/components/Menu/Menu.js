@@ -12,7 +12,7 @@ function Menu(props) {
         props.toggleMenu()
     }
 
-    function logout() {
+    function signOut() {
         axios.delete('/api/logout').then(res => {
             console.log('User has logged out')
             props.logout()
@@ -23,9 +23,12 @@ function Menu(props) {
 
 
     return (
-        <div className='userMenu'>
-            I am the user profile menu!
-        </div>
+        <section className='userMenu'>
+            <button onClick={closeMenu}>Close Menu</button>
+            <Link to='/Plan' style={{textDecoration: 'none'}} onClick={closeMenu}><h4>My Plan</h4></Link>
+            <br></br>
+            <button onClick={signOut}>Sign Out</button>
+        </section>
     )
 }
 
