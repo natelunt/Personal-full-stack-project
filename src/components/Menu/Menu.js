@@ -1,9 +1,9 @@
-import React, {useState} from 'react';
+import React, { useState } from 'react';
 import axios from 'axios';
 import './menu.css';
 import { connect } from 'react-redux'
 import { logoutUser } from '../../redux/userReducer';
-import { Redirect } from 'react-router-dom';
+import { withRouter, Link } from 'react-router-dom';
 
 
 function Menu(props) {
@@ -15,7 +15,7 @@ function Menu(props) {
     function signOut() {
         axios.delete('/api/logout').then(res => {
             console.log('User has logged out')
-            props.logout()
+            props.logoutUser()
         }).catch(error => {
             console.log(error)
         })
@@ -39,7 +39,7 @@ const mapStateToProps = (state) => {
 }
 
 const mapDispatchToProps = {
-    logout
+    logoutUser
 }
 
 
