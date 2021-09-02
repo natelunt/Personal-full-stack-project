@@ -61,37 +61,6 @@ function Home() {
                         </div>
                     </div>
                 </div>
-                <div className='campgrounds-container'>
-                    <div className='containers-title'></div>
-                    <div className='river-container'>
-                        <div className='river-class'>
-                            <div className='river-track'>
-                                <div className='river-item'>
-                                    <div className='item-card-container'>
-                                        <div className='container'>
-                                            <a></a>
-                                            <div className='backround'></div>
-                                            <div className='card-content'>
-                                                <div className='name'></div>
-                                                <a className='location'></a>
-                                                <div className='info'>
-                                                    <span className='campground-quality'></span>
-                                                    <span className='rating'>
-                                                        <span className='liked-icon'></span>
-                                                        <span className='like-count'>(0)</span>
-                                                        <span className='disliked-icon'></span>
-                                                        <span className='dislike-count'>(0)</span>
-                                                    </span>
-                                                </div>
-                                                <div className='info'></div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
             </section>
         </div>
     )
