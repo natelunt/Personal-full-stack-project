@@ -46,7 +46,8 @@ products
     category                  VARCHAR(100) NOT NULL,
     price                     VARCHAR(100) NOT NULL,
     product_description       VARCHAR(1000) NOT NULL,
-    product_name              VARCHAR(100) NOT NULL
+    product_name              VARCHAR(100) NOT NULL,
+    count_in_stock            INTEGER NOT NULL
    ); 
 ```
 
