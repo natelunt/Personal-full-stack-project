@@ -62,16 +62,6 @@ product_images
 ```
 
 
-carts
-```SQL
-   CREATE TABLE trail_favorites (
-    favorite_trail_id    SERIAL PRIMARY KEY NOT NULL,
-    user_id              REFERENCES users (user_id),
-    trail_id             REFERENCES trails (trail_id)
-   );
-```
-
-
 
 users
 ```SQL
@@ -89,7 +79,7 @@ users
 
 ### Endpoints
 
-#### Trails/Campgrounds
+#### Products
 - get all products => GET '/api/products'
 - get specific product => GET '/api/products/:id'
 - get product categories => GET '/api/products/categories'
