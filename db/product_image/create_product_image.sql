@@ -1,2 +1,2 @@
-INSERT INTO campgrounds (cg_location, cg_description, cg_name)
-values (${location}, ${description}, ${name})
+INSERT INTO product_images (product_id, url)
+values (${product_id}, ${url}) RETURNING *;

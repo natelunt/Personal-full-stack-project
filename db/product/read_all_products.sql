@@ -1,3 +1,4 @@
-SELECT trails.*, trail_images.*
-FROM trails LEFT JOIN trail_images
-ON trails.trail_id = trail_images.trail_id
+SELECT * FROM product_images pi
+JOIN products p
+ON p.product_id = pi.product_id
+WHERE p.product_id = pi.product_id;
