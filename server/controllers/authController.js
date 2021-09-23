@@ -3,21 +3,21 @@ const bcrypt = require('bcryptjs');
 module.exports = {
 
     register: async (req, res) => {
-        const { email, password } = req.body;
+        const { name, email, password } = req.body;
         const db = req.app.get('db');
 
         try {
-            let [ existingUser ] = await db.auth.check_for_user({ email });
+            const [ existingUser ] = await db.auth.check_for_user({ email });
 
             if (existingUser) {
-                res.status(400).send('Email already exists.');
+                res.status(400).send('User already exists.');
                 return;
             }
 
             const salt = bcrypt.genSaltSync(5);
             const hash = bcrypt.hashSync(password, salt);
 
-            let [ newUser ] = await db.auth.register_user({ email, hash });
+            const [ newUser ] = await db.auth.register_user({ name, email, hash });
 
             if (newUser) {
                 delete newUser.hash;
@@ -40,10 +40,10 @@ module.exports = {
         const db = req.app.get('db');
 
         try {
-            let [ existingUser ] = await db.auth.check_for_user({ email });
+            const [ existingUser ] = await db.auth.find_user_by_email({ email });
 
             if (!existingUser) {
-                res.status(400).send('User does not exist');
+                res.status(404).send('User does not exist');
                 return;
             }
 
@@ -80,7 +80,7 @@ module.exports = {
             const { email, user_id } = req.session.user;
 
             try {
-                let [ existingUser ] = await db.auth.check_for_user({ email });
+                const [ existingUser ] = await db.auth.find_user_by_email({ email });
 
                 if (!existingUser) {
                     res.status(404).send('Account not found');
@@ -103,6 +103,16 @@ module.exports = {
         }
 
         res.status(400).send('You must be logged in to delete an account. Please log in.')
+    },
+
+
+
+    updateUser: async (req, res) => {
+        const db = req.app.get('db');
+        const { id } = req.params;
+        const existingUser = await db.user.find_user_by_id({ id });
+        const { user_id } = existingUser[0];
+        const { email, password } = req.body;
     }
 
 }
