@@ -106,13 +106,56 @@ module.exports = {
     },
 
 
-
+    // received some assistance on updateUser, will work on rewriting it's code to be consistent with the code above
     updateUser: async (req, res) => {
         const db = req.app.get('db');
         const { id } = req.params;
         const existingUser = await db.user.find_user_by_id({ id });
         const { user_id } = existingUser[0];
         const { email, password } = req.body;
+
+        // email but no password provided
+        if (!password && email) {
+            if (email !== existingUser[0].email) {
+                const hash = existingUser[0].hash;
+                const updatedUser = await db.user.update_user({ user_id, email, hash });
+
+                req.session.user = updatedUser[0];
+                delete updatedUser[0].hash;
+                res.status(202).send(req.session.user);
+                return;
+            } else {
+                res.status(406).send('Email matches current email');
+                return;
+            }
+        }
+
+
+        // only password provided
+        if (password && !email) {
+            if (!bcrypt.compareSync(password, existingUser[0].hash)) {
+                const email = existingUser[0].email;
+                const salt = bcrypt.genSaltSync(5);
+                const hash = bcrypt.hashSync(password, salt);
+                const updated = await db.user.update_user({ user_id, email, hash });
+
+                req.session.user = updatedUser[0];
+                delete updatedUser[0].hash;
+                res.status(202).send(req.session.user);
+                return;
+            } else {
+                res.status(406).send('Cannot enter current password');
+                return;
+            }
+        }
+
+        // email and password provided
+        if (password && email) {}
+
+        // neither email nor password provided
+        if (!password && !email) {
+            res.status(406).send('No data provided');
+        }
     }
 
 }
