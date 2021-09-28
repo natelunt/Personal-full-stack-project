@@ -1,22 +1,24 @@
-const axios = require('axios');
+require('dotenv').config();
+const stripe = require('stripe')(process.env.STRIPE_SECRET_TEST);
 
 module.exports = {
-    getAllTrails: async (req, res) => {
-        const db = await req.app.get('db')
-        db.trails.read_all_trails()
-        .then(trails => {
-          trails.length > 0 ? res.status(200).send(trails): res.sendStatus(200)
-        }).catch(err => {
-          console.log(err)
-          res.sendStatus(500)
-        })
-    },
+  submitPayment: async (req, res) => {
+    const { id, amount } = req.body;
 
-    getSpecificTrails: async (req, res) => {
-      const db = req.app.get('db');
-      const { id } = req.session.user;
-      const { difficulty, location, description, name } = req.body;
-      const [trail] = await db.trails.create_trail(difficulty, location, description, name)
-      return res.status(200).send(trail)
+    try {
+      const payment = await stripe.paymentIntents.create({
+        amount,
+        currency: 'USD',
+        description: 'On The Rocks',
+        payment_method: id,
+        confirm: true,
+      });
+      res.status(200).send({ message: 'Payment successful', success: true });
+
+    } catch (error) {
+      console.log('Error', error);
+      res.status(400).send({ message: 'Payment failed', success: false });
     }
+  }
+
 }

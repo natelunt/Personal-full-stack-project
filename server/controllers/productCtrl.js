@@ -1,46 +1,71 @@
-const axios = require('axios');
-
 module.exports = {
-    getAllCampgrounds: async (req, res) => {
-        const db = await req.app.get('db')
-        db.trails.read_all_camps()
-        .then(campgrounds => {
-          campgrounds.length > 0 ? res.status(200).send(campgrounds): res.sendStatus(200)
-        }).catch(err => {
-          console.log(err)
-          res.sendStatus(500)
-        })
-    },
+  getAllProducts: async (req, res) => {
+    const db = req.app.get('db');
 
-    getSpecificCampgrounds: async (req, res) => {
-      const db = req.app.get('db');
-      const { id } = req.session.user;
-      const { location, description, name } = req.body;
-      const [camp] = await db.campgrounds.create_camp(location, description, name)
-      return res.status(200).send(camp)
+    try {
+      const products = await db.product.get_all_products();
+      if (products.length !== 0) {
+        res.status(200).send(products);
+      } else {
+        throw 'Not found';
+      }
+    } catch (error) {
+      res.status(404).send('Products not found');
     }
+  },
+
+  getProduct: async (req, res) => {
+    const db = req.app.get('db');
+
+    try {
+      const { id } = req.params;
+      const foundProduct = await db.product.get_product_by_id({ id });
+      if (foundProduct.length) {
+        const product = foundProduct[0];
+        res.status(200).send(product);
+      } else {
+        throw 'Not found';
+      }
+    } catch (error) {
+      res.status(404).send('Product not found');
+    }
+  },
+
+  getProductCategories: async (req, res) => {
+    const db = req.app.get('db');
+    const { category } = req.query;
+
+    try {
+      const products = await db.product.get_product_by_category({ category });
+      if (products.length !== 0) {
+        res.status(200).send(products);
+      } else {
+        throw 'Not found';
+      }
+    } catch (error) {
+      res.status(404).send(`${category} not found`);
+    }
+  },
+
+  createProduct: async (req, res) => {
+    const db = req.app.get('db');
+    const { category, price, description, name, count_in_stock } = req.body;
+
+    try {
+      const newProduct = await db.product.create_product({
+        category,
+        price,
+        description,
+        name,
+        count_in_stock
+      });
+      const product = newProduct[0];
+
+      res.status(201).send(product);
+
+    } catch (error) {
+      res.status(406).send('Invalid entry');
+    }
+  }
+  
 }
-
-
-/////// Code below is to pull all campground data from National Park API ////////
-
-// require('dotenv').config()
-// const axios = require('axios');
-// const { BEARER_TOKEN } = process.env
-
-// module.exports = {
-//     getAllCampgrounds: async (req, res) => {
-//         const config = {
-//             method: 'get',
-//             url: `https://developer.nps.gov/api/v1/campgrounds?API_KEY=${BEARER_TOKEN}`,
-//             headers: { }
-//           };
-
-//         axios(config).then(campgrounds => {
-//             res.status(200).send(campgrounds.data)
-//         })
-
-//     }
-// }
-
-/////// Code above is to pull all campground data from National Park API ////////
