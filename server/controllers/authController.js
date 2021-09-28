@@ -150,7 +150,20 @@ module.exports = {
         }
 
         // email and password provided
-        if (password && email) {}
+        if (password && email) {
+            if (!bcrypt.compareSync(password, existingUser[0].hash) && email !== existingUser[0].email){
+                const salt = bcrypt.genSaltSync(5);
+                const hash = bcrypt.hashSync(password, salt);
+                const updatedUser = await db.user.update_user({ user_id, email, hash });
+                req.session.user = updatedUser[0];
+                delete updatedUser[0].hash;
+                res.status(202).send(req.session.user);
+                return;
+            } else {
+                res.status(406).send('Submission matches current user email or password');
+                return;
+            }
+        }
 
         // neither email nor password provided
         if (!password && !email) {
