@@ -4,8 +4,9 @@ const massive = require('massive');
 const session = require('express-session');
 const cors = require('cors');
 const authCtrl = require('./controllers/authController');
-const trailsCtrl = require('./controllers/trailsCtrl');
-const campgroundsCtrl = require('./controllers/campgroundsCtrl');
+const productCtrl = require('./controllers/productCtrl');
+const { submitPayment } = require('./controllers/paymentCtrl');
+const { sendEmail } = require('./controllers/nodeMailerCtrl');
 const { SERVER_PORT, CONNECTION_STRING, SESSION_SECRET} = process.env
 
 const app = express();
@@ -45,14 +46,25 @@ massive({
 app.post('/api/register', authCtrl.register);
 app.post('/api/login', authCtrl.login);
 app.delete('/api/logout', authCtrl.logout);
-app.post('/api/delete', authCtrl.delete);
+app.delete('/api/delete', authCtrl.delete);
+app.put('/api/update/:id', authCtrl.updateUser)
 
 
-// Trail & Campground Endpoints
-app.get('/api/trails', trailsCtrl.getAllTrails);
-app.post('/api/trails', trailsCtrl.getSpecificTrails);
-app.get('/api/campgrounds', campgroundsCtrl.getAllCampgrounds);
-app.post('/api/campgrounds', campgroundsCtrl.getSpecificCampgrounds);
+// Product Endpoints
+app.get('/api/products', productCtrl.getAllProducts);
+app.get('/api/products/categories', productCtrl.getProductCategories);
+app.get('/api/products', productCtrl.getProduct);
+app.post('/api/products', productCtrl.createProduct);
+
+
+// Payment Endpoints
+app.post('/api/payment', paymentCtrl.submitPayment);
+
+
+// Nodemailer Endpoints
+app.post('/api/send', nodeMailerCtrl.sendEmail);
+app.use(express.static(path.join(__dirname, '../build'))) //will need assistance
+app.get('*', (req, res) => res.sendFile(path.resolve(__dirname, 'build', 'index.html')))
 
 
 /* HTTP REQUEST: 
