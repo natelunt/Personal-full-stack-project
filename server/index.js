@@ -61,10 +61,10 @@ app.post('/api/products', productCtrl.createProduct);
 app.post('/api/payment', paymentCtrl.submitPayment);
 
 
-// Nodemailer Endpoints
-app.post('/api/send', nodeMailerCtrl.sendEmail);
-app.use(express.static(path.join(__dirname, '../build'))) //will need assistance
-app.get('*', (req, res) => res.sendFile(path.resolve(__dirname, 'build', 'index.html')))
+// Nodemailer Endpoints --- for hosting project, focus on this once the project is completed.
+// app.post('/api/send', nodeMailerCtrl.sendEmail);
+// app.use(express.static(path.join(__dirname, '../build')))
+// app.get('*', (req, res) => res.sendFile(path.resolve(__dirname, 'build', 'index.html')))
 
 
 /* HTTP REQUEST: 
