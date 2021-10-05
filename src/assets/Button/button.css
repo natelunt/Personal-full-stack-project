@@ -1,13 +1,36 @@
-.logout {}
+.logout {
+    font-size: 24px;
+    background-color: seagreen;
+    border: none;
+}
 
-.logout:hover {}
+.logout:hover {
+    cursor: pointer;
+}
 
 
-.remove {}
+.remove {
+    background-color: sienna;
+    border: none;
+    padding-right: 40px;
+}
 
-.remove:hover {}
+.remove:hover {
+    cursor: pointer;
+}
 
 
-.submit {}
+.submit {
+    margin-top: 20px;
+    font-size: 20px;
+    background-color: steelblue;
+    border-radius: 5px;
+}
 
-.submit:hover {}
+.submit:hover {
+    color: steelblue;
+    background-color: black;
+    -webkit-transition-duration: 0.4s; /* Safari */
+    transition-duration: 0.4s;
+    cursor: pointer;
+}
