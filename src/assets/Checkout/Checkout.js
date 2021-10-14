@@ -75,8 +75,75 @@ const Checkout = ({ cartItems, user, emptyCart }) => {
             }
         });
 
-        if (!error) {}
-    }
+        if (!error) {
+            try {
+                const { id } = paymentMethod;
+                const res = await axios.post('/api/payment', {
+                    id,
+                    amount: Math.round(subtotal * 100)
+                });
+                const message = `Your purchase was successful! Thank you for your patronage and have an awesome day! \nItems purchased: \n${itemList}`;
+
+                if (res.data.success) {
+                    setSuccess(true)
+                    axios.post('/api/send', {
+                        name: user.name,
+                        email: user.email,
+                        message,
+                    });
+                    clearCart();
+                    setTimeout(() => {
+                        history.push('/')
+                    }, 2000);
+                }
+            } catch (error) {
+                console,log('Error', error)
+            }
+        } else {
+            console.log(error.message);
+        }
+    };
+
+    return (
+        <section className='container'>
+            {!success ? (
+                <>
+                    <form className='checkout' onSubmit={handleSubmit}>
+                        <fieldset className='checkoutGroup'>
+                            <div className='checkoutRow'>
+                                <FormInput name='name' label='' type='text' placeholder='name...' onChange={(e) => setName(e.target.value)} value={name} className='input' required={true}/>
+                            </div>
+                            <div className='checkoutRow'>
+                                <FormInput name='email' label='*Email' type='email' placeholder='email...' onChange={(e) => setEmail(e.target.value)} value={email} className='input' required={true}/>
+                            </div>
+                            <div className='checkoutRow'>
+                                <FormInput name='phone' label='*Phone' type='tel' placeholder='phone number...' onChange={(e) => setPhone(e.target.value)} value={phone} className='input' required={true}/>
+                            </div>
+                            <div className='checkoutRow'>
+                                <FormInput name='line1' label='address1' type='text' placeholder='address...' onChange={(e) => setLine1(e.target.value)} value={line1} className='input' required={true}/>
+                            </div>
+                            <div className='checkoutRow'>
+                                <FormInput name='line2' label='address2' type='text' placeholder='address...' onChange={(e) => setLine2(e.target.value)} value={line2} className='input'/>
+                            </div>
+                            <div className='checkoutRow'>
+                                <FormInput name='city' label='*City' type='text' placeholder='city...' onChange={(e) => setCity(e.target.value)} value={city} className='input' required={true}/>
+                            </div>
+                            <div className='checkoutRow'>
+                                <FormInput name='state' label='*State' type='text' placeholder='state...' onChange={(e) => setState(e.target.value)} value={myState} className='input' required={true}/>
+                            </div>
+                            <div className='checkoutRow'>
+                                <CardElement options={CARD_OPTIONS}/>
+                            </div>
+                        </fieldset>
+                    </form>
+                </>
+            ) : (
+                <>
+                    <h2 className='payment-successful'>You just bought some sweet gear! Sending you back to the home page now...</h2>
+                </>
+            )}
+        </section>
+    )
 }
 
 
