@@ -1,12 +1,32 @@
 import { createStore, applyMiddleware, combineReducers } from 'redux';
-import promiseMiddleware from 'redux-promise-middleware';
-import user from './userReducer';
-import plan from './planReducer';
 import { composeWithDevTools } from 'redux-devtools-extension';
+import promiseMiddleware from 'redux-promise-middleware';
+import userReducer from './userReducer';
+import productsReducer from './productsReducer';
+import productDetailsReducer from './productDetailsReducer';
+import cartReducer from './cartReducer';
 
 const rootReducer = combineReducers({
-    user,
-    plan
+    userReducer,
+    productsReducer,
+    productDetailsReducer,
+    cartReducer
 });
 
-export default createStore(rootReducer, composeWithDevTools(applyMiddleware(promiseMiddleware)));
+const cartItemsFromStorage = localStorage.getItem('cartItems') ? JSON.parse(localStorage.getItem('cartItems')) : [];
+
+const initialState = {
+    cartReducer: { cartItems: cartItemsFromStorage }
+};
+
+const store = createStore(
+    rootReducer,
+    initialState,
+    composeWithDevTools(applyMiddleware(promiseMiddleware))
+);
+
+store.subscribe(() => {
+    localStorage.setItem('cartItems', JSON.stringify(store.getState().cartReducer.cartItems))
+});
+
+export default store;

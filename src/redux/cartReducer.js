@@ -45,9 +45,7 @@ export default function reducer(state = initialState, action) {
             if (existItem) {
                 return {
                     ...state,
-                    cartItems: state.cartItems.map((x) =>
-                     x.product_id === existItem.product_id ? { ...item, qty } : x
-                    ),
+                    cartItems: state.cartItems.map((x) => x.product_id === existItem.product_id ? { ...item, qty } : x),
                 };
             } else {
                 return {
