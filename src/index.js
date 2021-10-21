@@ -2,16 +2,22 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import './index.css';
 import App from './App';
-import reportWebVitals from './reportWebVitals';
-import store from './redux/store';
+import { Elements } from '@stripe/react-strip-js';
+import { loadStripe } from '@stripe/stripe-js';
 import { HashRouter as Router } from 'react-router-dom';
 import { Provider } from 'react-redux';
+import store from './redux/store';
+import reportWebVitals from './reportWebVitals';
+
+const stripePromise = loadStripe('pk_test_fm2RtiUeglz5oQL8GXe4xjzM')
 
 ReactDOM.render(
   <React.StrictMode>
     <Router>
       <Provider store={store}>
-        <App />
+        <Elements stripe={stripePromise}>
+          <App />
+        </Elements>
       </Provider>
     </Router>
   </React.StrictMode>,
