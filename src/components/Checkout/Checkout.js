@@ -3,7 +3,7 @@ import { useHistory } from 'react-router-dom';
 import { CardElement, useStripe, useElements } from '@stripe/react-stripe-js';
 import { connect } from 'react-redux';
 import axios from 'axios';
-import FormInput from '../FormInput/FormInput';
+import FormInput from '../../assets/FormInput/FormInput';
 import './checkout.css';
 import { clearCart } from '../../redux/cartReducer';
 

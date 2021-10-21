@@ -1,15 +1,15 @@
 import React from 'react';
 import axios from 'axios';
-// import './explore.css';
+// import './shop.css';
 import { connect } from 'react-redux';
 
 
-const Explore = () => {
+const Shop = () => {
     return (
         <div>
-            explore
+            shop
         </div>
     )
 }
 
-export default Explore
+export default Shop
