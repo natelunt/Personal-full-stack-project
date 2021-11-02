@@ -31,7 +31,7 @@ const CARD_OPTIONS = {
     }
 };
 
-const Checkout = ({ cartItems, user, emptyCart }) => {
+const Checkout = ({ cartItems, user, clearCart }) => {
     const [success, setSuccess] = useState(false);
     const [email, setEmail] = useState(user.email);
     const [name, setName] = useState(user.name);
@@ -129,7 +129,7 @@ const Checkout = ({ cartItems, user, emptyCart }) => {
                                 <FormInput name='city' label='*City' type='text' placeholder='city...' onChange={(e) => setCity(e.target.value)} value={city} className='input' required={true}/>
                             </div>
                             <div className='checkoutRow'>
-                                <FormInput name='state' label='*State' type='text' placeholder='state...' onChange={(e) => setState(e.target.value)} value={myState} className='input' required={true}/>
+                                <FormInput name='state' label='*State' type='text' placeholder='state...' onChange={(e) => setMyState(e.target.value)} value={myState} className='input' required={true}/>
                             </div>
                             <div className='checkoutRow'>
                                 <CardElement options={CARD_OPTIONS}/>

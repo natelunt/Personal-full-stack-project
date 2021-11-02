@@ -1,0 +1,34 @@
+.search-container {
+    display: grid;
+    grid-template-columns: repeat(7, 1fr);
+    margin-top: 20px;
+}
+
+.search-container label {
+    display: none;
+}
+
+#searchValue {
+    width: 100%;
+    grid-column-start: 3;
+    grid-row-end: 6;
+}
+
+.search-container a {
+    grid-column: 7;
+    font-size: 26px;
+}
+
+@media (max-width: 900px) {
+    #searchValue {
+        width: 100%;
+        grid-column-start: 2;
+        grid-column-end: 7;
+    }
+}
+
+@media (max-width: 500px) {
+    #searchValue {
+        display: none;
+    }
+}
