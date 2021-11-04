@@ -1,43 +1,48 @@
-.nav {
+nav {
+    display: none;
+    position: fixed;
+    top: 0;
+    height: 60px;
     width: 100%;
-    height: 5vh;
-    display: flex;
-    justify-content: space-around;
-    align-items: center;
-    background-color: olivedrab;
-}
-
-.nav-links{
-    width: 15%;
-    flex-direction: row;
-    justify-content: space-between;
-    align-items: center;
-    background-color: peru;
-}
-
-.explore-button{
-    width: 25%;
-    justify-content: space-around;
-    align-items: center;
-    background-color: powderblue;
-}
-
-.plan-button{
-    width: 25%;
-    justify-content: space-around;
-    align-items: center;
-    background-color: slateblue;
-}
-
-.nav-img{
-    width: 60%;
-    align-items: center;
-    background-color: greenyellow;
-}
-
-.nav-avatar{
-    width: 15%;
-    justify-content: flex-end;
-    align-items: center;
-    background-color: peru;
-}
+  }
+  
+  @media (max-width: 1300px) {
+    nav {
+      display: block;
+      border-bottom: 1px solid black;
+      background-color: #fffaf0;
+    }
+  
+    .nav-links {
+      display: flex;
+      justify-content: space-around;
+      align-items: center;
+      height: 100%;
+    }
+  
+    .nav-links a {
+      text-decoration: none;
+      color: black;
+      font-size: 20px;
+    }
+  }
+  
+  @media (max-width: 900px) {
+    .nav-links a {
+      text-decoration: none;
+      color: black;
+      font-size: 16px;
+    }
+  
+    .nav-links button {
+      font-size: 16px;
+    }
+  }
+  
+  @media (max-width: 700px) {
+    .nav-links a {
+      text-decoration: none;
+      color: black;
+      font-size: 16px;
+    }
+  }
