@@ -3,17 +3,17 @@ import axios from 'axios';
 import './nav.css';
 import { connect } from 'react-redux';
 import { Link, useHistory } from 'react-router-dom';
-import { clearUser } from '../../redux/userReducer';
+import { logoutUser } from '../../redux/userReducer';
 import Button from '../../assets/Button/Button'
 
 
-const Nav = ({ user, clearUser, cartItems }) => {
+const Nav = ({ user,logouteUser, cartItems }) => {
     const history = useHistory();
     
     const logout = async () => {
         try {
             await axios.delete('/api/logout');
-            clearUser();
+            logoutUser();
             history.push('/logout');
         } catch (error) {
             console.log(error)

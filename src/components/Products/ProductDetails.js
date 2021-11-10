@@ -1,18 +1,18 @@
 import React, { useState, useEffect } from 'react';
 import { useHistory } from 'react-router-dom';
 import { connect } from 'react-redux';
-import { getProductByID } from '../../redux/productDetailsReducer';
+import { getProductById } from '../../redux/productDetailsReducer';
 import Button from '../../assets/Button/Button';
-import './productDetails.ccs';
+import './productDetails';
 
-const ProductDetails = ({ getProductByID, product }) => {
+const ProductDetails = ({ getProductById, product }) => {
     const history = useHistory;
     const productId = history.location.pathname.split('/')[2];
     const [itemQty, setItemQty] = useState(1);
 
     useEffect(() => {
-        getProductByID(productId);
-    }, [getProductByID, productId]);
+        getProductById(productId);
+    }, [getProductById, productId]);
 
     const addToCartHandler = () => {
         history.push(`/cart/${productId}?qty=${itemQty}`)
@@ -56,7 +56,7 @@ const ProductDetails = ({ getProductByID, product }) => {
 };
 
 const mapDispatchToProps = {
-    getProductByID: getProductByID,
+    getProductById: getProductById,
 };
 
 const mapStateToPrps = (reduxState) => {
