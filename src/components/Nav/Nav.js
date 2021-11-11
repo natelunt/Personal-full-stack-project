@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React from 'react';
 import axios from 'axios';
 import './nav.css';
 import { connect } from 'react-redux';
@@ -7,7 +7,7 @@ import { logoutUser } from '../../redux/userReducer';
 import Button from '../../assets/Button/Button'
 
 
-const Nav = ({ user,logouteUser, cartItems }) => {
+const Nav = ({ user,logoutUser, cartItems }) => {
     const history = useHistory();
     
     const logout = async () => {
@@ -35,7 +35,7 @@ const Nav = ({ user,logouteUser, cartItems }) => {
 };
 
 const mapDispatchToProps = {
-    clearUser: clearUser
+    logoutUser: logoutUser
 };
 
 const mapStateToProps = (reduxState) => {

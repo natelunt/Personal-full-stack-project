@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import axios from 'axios';
+// import axios from 'axios';
 import './auth.css';
 import { connect } from 'react-redux';
 import { registerUser, loginUser } from '../../redux/userReducer';
@@ -8,7 +8,7 @@ import { Redirect } from 'react-router-dom';
 function Auth(props) {
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
-    const [username, setUsername] =useState("");
+    // const [username, setUsername] =useState("");
     const [registering, setRegistering] = useState(false);
 
     const buttonContent = registering ? "Register" : "Login";

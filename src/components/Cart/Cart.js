@@ -5,7 +5,7 @@ import { addToCart, removeFromCart } from '../../redux/cartReducer';
 import Button from '../../assets/Button/Button';
 import './cart.css';
 
-const Cart = ({}) => {
+const Cart = ({ addToCart, removeFromCart, cartItems }) => {
     const history = useHistory();
     const productId = history.location.pathname.split('/')[2];
     const qty = history.location.search ? Number(history.location.search.split('=')[1]) : 1;

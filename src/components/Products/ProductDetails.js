@@ -3,7 +3,7 @@ import { useHistory } from 'react-router-dom';
 import { connect } from 'react-redux';
 import { getProductById } from '../../redux/productDetailsReducer';
 import Button from '../../assets/Button/Button';
-import './productDetails';
+import './productDetails.css';
 
 const ProductDetails = ({ getProductById, product }) => {
     const history = useHistory;

@@ -97,7 +97,7 @@ const Checkout = ({ cartItems, user, clearCart }) => {
                     }, 2000);
                 }
             } catch (error) {
-                console,log('Error', error)
+                console.log('Error', error)
             }
         } else {
             console.log(error.message);
@@ -149,7 +149,7 @@ const Checkout = ({ cartItems, user, clearCart }) => {
 
 
 const mapDispatchToProps = {
-    emptyCart: emptyCart
+    clearCart: clearCart
 };
 
 const mapStateToProps = (reduxState) => {
